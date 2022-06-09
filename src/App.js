@@ -48,7 +48,7 @@ function App() {
                 <CustomCalendar value={value} setValue ={setValue}/>
         <button className="buttonColor" onClick={addNewNotes}>Add Note</button>
             </div>
-
+<div>bukdnfsdknfdklsflkdsnfkldsnkflskdfnkfkldsfnd</div>
         <Time/>
         </div>
         <div className='flexElement'>
