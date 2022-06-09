@@ -8,6 +8,7 @@ const Nots = (props,remove) => {
             <div>
             <strong>{props.number}.{props.post.title}</strong>
                 <div>{props.post.body}</div>
+                <div>{JSON.stringify(props.post.value)}</div>
             </div>
             <div>
             <img src={Clear} alt='deleteButton' onClick={()=>{props.remove(props.post)}}/>

@@ -1,16 +1,12 @@
 import React,{useState} from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import dayjs from 'dayjs';
 
-const CustomCalendar = () => {
-    const [value, onChange] = useState(new Date());
-    console.log(value)
-
+const CustomCalendar = ({setValue , value}) => {
     return (
             <div>
                 <Calendar
-                    onChange={onChange}
+                    onChange={setValue}
                     value={value}
                     minDate={new Date()}
                 />

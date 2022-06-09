@@ -4,7 +4,6 @@ import Nots from "./components/Nots";
 import AddedNotes from "./components/AddedNotes";
 import React, {useState} from "react";
 import Time from "./components/Time";
-import Clock from 'react-live-clock';
 import CustomCalendar from "./components/CustomCalendar";
 
 
@@ -13,13 +12,15 @@ function App() {
     const[notes, setNotes] = useState([])
     const [title, setTitle]=useState('')
     const [body, setBody] = useState('')
-
+    const [value, setValue] = useState()
     const addNewNotes = () => {
-      const newNote ={
-          id:Date.now(),
+      const newNote = {
+          id: Date.now(),
           title,
-          body
+          body,
+          value
       }
+
       setNotes([...notes,newNote])
         setTitle('')
         setBody('')
@@ -44,13 +45,14 @@ function App() {
             placeholder = "Тело заметки "
             onChange = {e =>setBody(e.target.value)}
             value = {body}/>
+                <CustomCalendar value={value} setValue ={setValue}/>
         <button className="buttonColor" onClick={addNewNotes}>Add Note</button>
             </div>
+
         <Time/>
         </div>
-        <CustomCalendar/>
         <div className='flexElement'>
-            {notes.map((notes, index)=><Nots number ={index + 1} remove = {deleteNotes} post={notes}/>)}
+            {notes.map((notes, index)=><Nots number ={index + 1} remove = {deleteNotes} value={value} post={notes}/>)}
         </div>
     </>
   );
