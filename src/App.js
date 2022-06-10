@@ -51,7 +51,13 @@ function App() {
         <Time/>
         </div>
         <div className='flexElement'>
-            {notes.map((notes, index)=><Nots number ={index + 1} remove = {deleteNotes} value={value} post={notes}/>)}
+            {notes.map((notes, index)=>
+                <Nots
+                    number ={index + 1}
+                    remove = {deleteNotes}
+                    value={value}
+                    post={notes}
+                />)}
         </div>
     </>
   );
