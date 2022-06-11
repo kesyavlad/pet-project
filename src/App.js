@@ -3,7 +3,6 @@ import './App.css';
 import Nots from "./components/Nots";
 import AddedNotes from "./components/AddedNotes";
 import React, {useState} from "react";
-import Time from "./components/Time";
 import CustomCalendar from "./components/CustomCalendar";
 
 
@@ -13,13 +12,19 @@ function App() {
     const [title, setTitle]=useState('')
     const [body, setBody] = useState('')
     const [value, setValue] = useState()
+    const [isChecked, setIsChecked] = useState(false)
+    const [time, setTime] = useState('00:00')
+
     const addNewNotes = () => {
       const newNote = {
           id: Date.now(),
           title,
           body,
-          value
+          value,
+          time
       }
+
+
 
       setNotes([...notes,newNote])
         setTitle('')
@@ -28,6 +33,9 @@ function App() {
     const deleteNotes = (note) => {
         setNotes(notes.filter(p => p.id !== note.id))
     }
+    const handleOnChange = () => {
+        setIsChecked(!isChecked);
+    };
 
 
   return (
@@ -45,10 +53,25 @@ function App() {
             placeholder = "Тело заметки "
             onChange = {e =>setBody(e.target.value)}
             value = {body}/>
-                <CustomCalendar value={value} setValue ={setValue}/>
+                <div >
+                    <input
+                        type="checkbox"
+                        checked={isChecked}
+                        onChange={handleOnChange}
+                    />
+                    {isChecked?<span>Убрать календарь</span>:<span>Добавить календарь</span>}
+                    {isChecked?
+                        <>
+                        <CustomCalendar value={value} setValue ={setValue}/>
+                        <input type="time" id="appt" name="appt"
+                               onChange={(e) => {
+                                   setTime(e.currentTarget.value)}}/>
+                        </>
+                        :
+                        <div></div>}
+                </div>
         <button className="buttonColor" onClick={addNewNotes}>Add Note</button>
             </div>
-        <Time/>
         </div>
         <div className='flexElement'>
             {notes.map((notes, index)=>
@@ -57,8 +80,10 @@ function App() {
                     remove = {deleteNotes}
                     value={value}
                     post={notes}
+                    cheked = {isChecked}
                 />)}
         </div>
+
     </>
   );
 }
