@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import '../style/styleNote.css';
-import Clear from '../images/delete.svg';
+import '../Note/index.css';
+import Clear from '../../assets/images/delete.svg';
 
 const Note = ({ remove, post, number }) => {
   const [time, setTime] = useState(periodCalculate());

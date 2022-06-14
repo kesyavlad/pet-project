@@ -2,18 +2,41 @@
     font-size: 22px;
     height: 63px;
     width: 114px;
-    margin-top: 10px;
     border: 2px solid rgb(0,3,255);
     border-radius: 15px;
 }
+
 #root{
     display: flex;
     justify-content: center;
-    overflow: hidden
-}
-.flexElement{
-    height: 465px;
-    overflow: scroll;
-    margin-top: 19px;
+
 }
 
+.flexElement{
+    height: 477px;
+    overflow: auto;
+    margin-top: 22px;
+    overflow-x: hidden;
+}
+
+.flexBox{
+    display: flex;
+    margin-top: 10px;
+}
+.sortBox{
+    margin-left: 25px;
+    font-size: 20px;
+}
+@media (max-width: 910px) {
+    #root{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .flexElement{
+        height: 59vh;
+        overflow: auto;
+        margin-top: 10px;
+        overflow-x: hidden;
+    }
+}

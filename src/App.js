@@ -1,6 +1,6 @@
 import './App.css';
 import Note from './components/Note';
-import AddNote from './components/AddNote'; // ToDo change name to AddNote
+import AddNote from './components/AddNote';
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -8,7 +8,7 @@ import 'react-calendar/dist/Calendar.css';
 function App() {
   const [notes, setNotes] = useState([]);
   const [title, setTitle] = useState('');
-  const [value, setValue] = useState(new Date()); // ToDo change value to date
+  const [value, setValue] = useState(new Date());
   const [time, setTime] = useState('00:00');
 
   function formatDate(date) {
@@ -30,26 +30,61 @@ function App() {
   const deleteNote = (note) => {
     setNotes(notes.filter((p) => p.id !== note.id));
   };
-
+  const sortNoteDecreasing = () => {
+    setNotes(
+      [...notes].sort((a, b) => {
+        if (a.time > b.time) {
+          return -1;
+        }
+        if (a.time < b.time) {
+          return 1;
+        }
+      })
+    );
+  };
+  const sortNoteIncreasing = () => {
+    setNotes(
+      [...notes].sort((a, b) => {
+        if (a.time < b.time) {
+          return -1;
+        }
+        if (a.time > b.time) {
+          return 1;
+        }
+      })
+    );
+  };
   return (
     <>
       <div>
         <AddNote
           type="text"
-          placeholder="Reminder" // ToDo change to English
+          placeholder="Reminder"
           onChange={(e) => setTitle(e.target.value)}
           value={title}
         />
         <div>
           <Calendar onChange={setValue} value={value} minDate={new Date()} />
-          <input
-            type="time"
-            value={time}
-            onChange={(e) => {
-              setTime(e.currentTarget.value);
-            }}
-            className="timeButton"
-          />
+          <div className="flexBox">
+            <input
+              type="time"
+              value={time}
+              onChange={(e) => {
+                setTime(e.currentTarget.value);
+              }}
+              className="timeButton"
+            />
+            <div className="sortBox">
+              <div>
+                <input type="radio" name="sort" onClick={sortNoteIncreasing} />
+                <label>Sort by increasing</label>
+              </div>
+              <div>
+                <input type="radio" name="sort" onClick={sortNoteDecreasing} />
+                <label>Sort by decreasing</label>
+              </div>
+            </div>
+          </div>
         </div>
         <button className="buttonColor" onClick={addNewNotes}>
           Add Note
