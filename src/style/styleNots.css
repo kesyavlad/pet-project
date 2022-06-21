@@ -1,6 +1,6 @@
 .notes{
     display: flex;
-    border: 2px solid green;
+    border: 2px solid rgb(0,3,255);
     border-radius:15px ;
     justify-content: space-between;
     align-items: center;

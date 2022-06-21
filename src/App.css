@@ -1,5 +1,4 @@
 .flexElement{
-    display: flex;
-    flex-wrap:wrap;
-
+    height: 487px;
+    overflow: scroll;
 }
