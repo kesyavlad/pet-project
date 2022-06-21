@@ -1,59 +1,120 @@
-import logo from './logo.svg';
 import './App.css';
-import Nots from "./components/Nots";
-import AddedNotes from "./components/AddedNotes";
-import React, {useState} from "react";
-import Time from "./components/Time";
-import CustomCalendar from "./components/CustomCalendar";
-
+import Note from './components/Note';
+import AddNote from './components/AddNote';
+import React, { useState } from 'react';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  addNoteAction,
+  deleteNoteAction,
+  searchAction,
+  sortNoteDecreasingAction,
+  sortNoteIncreasingAction
+} from './components/store/actions/notes';
 
 function App() {
+  const [title, setTitle] = useState('');
+  const [value, setValue] = useState(new Date());
+  const [search, setSearch] = useState('');
+  const [time, setTime] = useState('00:00');
+  const dispatch = useDispatch();
+  const note = useSelector((state) => state.notes);
+  function formatDate(date) {
+    return [date.getFullYear(), date.getMonth() + 1, date.getDate()].join('.');
+  }
+  const addNewNotes = () => {
+    const newNote = {
+      id: Date.now(),
+      title,
+      time: `${formatDate(value)} ${time}`
+    };
+    dispatch(addNoteAction(newNote));
+    setTitle('');
+    setTime('00:00');
+  };
 
-    const[notes, setNotes] = useState([])
-    const [title, setTitle]=useState('')
-    const [body, setBody] = useState('')
-    const [value, setValue] = useState()
-    const addNewNotes = () => {
-      const newNote = {
-          id: Date.now(),
-          title,
-          body,
-          value
-      }
+  const deleteNote = (id) => {
+    dispatch(deleteNoteAction(id));
+  };
 
-      setNotes([...notes,newNote])
-        setTitle('')
-        setBody('')
-    }
-    const deleteNotes = (note) => {
-        setNotes(notes.filter(p => p.id !== note.id))
-    }
-
+  const sortNoteDecreasing = () => {
+    dispatch(sortNoteDecreasingAction());
+  };
+  const sortNoteIncreasing = () => {
+    dispatch(sortNoteIncreasingAction());
+  };
+  const searchField = (title) => {
+    dispatch(searchAction(title));
+  };
 
   return (
     <>
-        <div style={{display:"flex", justifyContent:"space-around"}}>
-            <div style={{width:"89%"}}>
-        <AddedNotes
-            type = "text"
-            placeholder = "Название заметки "
-            onChange = {e =>setTitle(e.target.value)}
-            value = {title}
+      <div>
+        <AddNote
+          type="text"
+          placeholder="Add a reminder"
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
         />
-        <AddedNotes
-            type = "text"
-            placeholder = "Тело заметки "
-            onChange = {e =>setBody(e.target.value)}
-            value = {body}/>
-                <CustomCalendar value={value} setValue ={setValue}/>
-        <button className="buttonColor" onClick={addNewNotes}>Add Note</button>
+        <input
+          className="inputField"
+          type="text"
+          onChange={(e) => {
+            setSearch(e.currentTarget.value);
+          }}
+          placeholder="Search....."
+        />
+        <button
+          className="buttonColor"
+          onClick={() => {
+            searchField(search);
+          }}>
+          Search
+        </button>
+        <div>
+          <Calendar onChange={setValue} value={value} minDate={new Date()} />
+          <div className="flexBox">
+            <input
+              type="time"
+              value={time}
+              onChange={(e) => {
+                setTime(e.currentTarget.value);
+              }}
+              className="timeButton"
+            />
+            <div className="sortBox">
+              <div>
+                <input type="radio" name="sort" onClick={sortNoteIncreasing} />
+                <label>Sort by increasing</label>
+              </div>
+              <div>
+                <input type="radio" name="sort" onClick={sortNoteDecreasing} />
+                <label>Sort by decreasing</label>
+              </div>
             </div>
-
-        <Time/>
+          </div>
         </div>
-        <div className='flexElement'>
-            {notes.map((notes, index)=><Nots number ={index + 1} remove = {deleteNotes} value={value} post={notes}/>)}
-        </div>
+        <button className="buttonColor" onClick={addNewNotes} disabled={!title.trim().length > 0}>
+          Add Note
+        </button>
+      </div>
+      <div className="flexElement">
+        {note.length ? (
+          note.map((note, index) => (
+            <Note
+              key={Math.random().toString(16).slice(2)}
+              number={index + 1}
+              remove={() => deleteNote(note.id)}
+              post={note}
+            />
+          ))
+        ) : (
+          <div style={{ fontSize: '45px', paddingLeft: '165px', paddingRight: '167px' }}>
+            No list
+          </div>
+        )}
+      </div>
     </>
   );
 }
