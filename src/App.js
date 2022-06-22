@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   addNoteAction,
   deleteNoteAction,
-  searchAction,
   sortNoteDecreasingAction,
   sortNoteIncreasingAction
 } from './components/store/actions/notes';
@@ -44,9 +43,7 @@ function App() {
   const sortNoteIncreasing = () => {
     dispatch(sortNoteIncreasingAction());
   };
-  const searchField = (title) => {
-    dispatch(searchAction(title));
-  };
+  console.log(note.filter((user) => user.title.toLowerCase().includes('2')));
 
   return (
     <>
@@ -65,13 +62,6 @@ function App() {
           }}
           placeholder="Search....."
         />
-        <button
-          className="buttonColor"
-          onClick={() => {
-            searchField(search);
-          }}>
-          Search
-        </button>
         <div>
           <Calendar onChange={setValue} value={value} minDate={new Date()} />
           <div className="flexBox">
@@ -101,14 +91,16 @@ function App() {
       </div>
       <div className="flexElement">
         {note.length ? (
-          note.map((note, index) => (
-            <Note
-              key={Math.random().toString(16).slice(2)}
-              number={index + 1}
-              remove={() => deleteNote(note.id)}
-              post={note}
-            />
-          ))
+          note
+            .filter((note) => note.title.toLowerCase().includes(search.toLowerCase()))
+            .map((note, index) => (
+              <Note
+                key={Math.random().toString(16).slice(2)}
+                number={index + 1}
+                remove={() => deleteNote(note.id)}
+                post={note}
+              />
+            ))
         ) : (
           <div style={{ fontSize: '45px', paddingLeft: '165px', paddingRight: '167px' }}>
             No list

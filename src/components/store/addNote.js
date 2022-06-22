@@ -37,11 +37,6 @@ export const cashReducer = (state = defaultState, action) => {
         ...state,
         notes: [...sortedNotesDown]
       };
-    case 'SEARCH':
-      return {
-        ...state,
-        notes: state.notes.filter((note) => note.title === action.payload)
-      };
     default:
       return state;
   }

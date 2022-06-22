@@ -11,6 +11,3 @@ export function sortNoteDecreasingAction() {
 export function sortNoteIncreasingAction() {
   return { type: 'SORT_DOWN' };
 }
-export function searchAction(note) {
-  return { type: 'SEARCH', payload: note };
-}
