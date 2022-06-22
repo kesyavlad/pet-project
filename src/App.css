@@ -1,4 +1,39 @@
 .flexElement{
-    height: 487px;
+    height: 59vh;
     overflow: scroll;
+    margin-top: 22px;
+    overflow-x:hidden;
+}
+#root{
+    display: flex;
+    justify-content: center;
+}
+
+.timeButton{
+  font-size: 35px;
+    border-radius: 15px;
+    border: 2px solid rgb(0,3,255);
+    margin-top: 7px;
+}
+
+.flexBox{
+    display: flex;
+    margin-top: 10px;
+}
+.sortBox{
+    margin-left: 25px;
+    font-size: 25px;
+}
+@media (max-width: 910px) {
+    #root{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .flexElement{
+        height: 59vh;
+        overflow: auto;
+        margin-top: 10px;
+        overflow-x: hidden;
+    }
 }
