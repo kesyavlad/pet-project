@@ -12,11 +12,12 @@ import {
   sortNoteIncreasingAction
 } from './components/store/actions/notes';
 
+
 function App() {
   const [title, setTitle] = useState('');
   const [value, setValue] = useState(new Date());
   const [search, setSearch] = useState('');
-  const [time, setTime] = useState('00:00');
+  const [time, setTime] = useState('23:59');
   const dispatch = useDispatch();
   const note = useSelector((state) => state.notes);
   function formatDate(date) {
@@ -30,7 +31,7 @@ function App() {
     };
     dispatch(addNoteAction(newNote));
     setTitle('');
-    setTime('00:00');
+    setTime('23:59');
   };
 
   const deleteNote = (id) => {
@@ -43,7 +44,11 @@ function App() {
   const sortNoteIncreasing = () => {
     dispatch(sortNoteIncreasingAction());
   };
-  console.log(note.filter((user) => user.title.toLowerCase().includes('2')));
+  const handleKeypress = e => {
+    if (e.key==="Enter" && title.length>0) {
+      addNewNotes();
+    }
+  };
 
   return (
     <>
@@ -53,6 +58,7 @@ function App() {
           placeholder="Add a reminder"
           onChange={(e) => setTitle(e.target.value)}
           value={title}
+          onKeyPress={handleKeypress}
         />
         <input
           className="inputField"
@@ -72,6 +78,7 @@ function App() {
                 setTime(e.currentTarget.value);
               }}
               className="timeButton"
+
             />
             <div className="sortBox">
               <div>
@@ -85,7 +92,7 @@ function App() {
             </div>
           </div>
         </div>
-        <button className="buttonColor" onClick={addNewNotes} disabled={!title.trim().length > 0}>
+        <button className="buttonColor" onClick={addNewNotes} disabled={!title.trim().length > 0} >
           Add Note
         </button>
       </div>

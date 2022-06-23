@@ -1,6 +1,6 @@
 .flexElement{
     height: 59vh;
-    overflow: scroll;
+    overflow: auto;
     margin-top: 22px;
     overflow-x:hidden;
 }

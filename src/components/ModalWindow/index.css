@@ -1,0 +1,27 @@
+
+.textColorYellow{
+    color: yellow;
+
+}
+.textColorWhite{
+    color: white;
+    text-align: center;
+}
+.buttonStyle{
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-around;
+}
+.redButton {
+    background: red;
+    border: 0  ;
+    border-radius: 15px;
+    font-size: 18px;
+
+}
+.grayButton{
+    background: gray;
+    border: 0  ;
+    border-radius: 15px;
+    font-size: 18px;
+}

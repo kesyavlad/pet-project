@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import '../Note/index.css';
 import Clear from '../../assets/images/delete.svg';
+import ModalDialog from "../ModalWindow";
 
 const Note = ({ remove, post, number }) => {
   const [time, setTime] = useState(periodCalculate());
+
 
   function periodCalculate() {
     let calculateTime = new Date(post.time) - new Date();
@@ -31,13 +33,13 @@ const Note = ({ remove, post, number }) => {
       </div>
       <div>{time}</div>
       <div>
-        <img
-          src={Clear}
-          alt="deleteButton"
-          onClick={() => {
-            remove(post);
-          }}
-        />
+        <ModalDialog text ={post.title} onSubmit={()=>{remove(post)}}>
+          <img
+              src={Clear}
+              alt="deleteButton"
+          />
+        </ModalDialog>
+
       </div>
     </div>
   );
