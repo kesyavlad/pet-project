@@ -109,7 +109,7 @@ function App() {
               />
             ))
         ) : (
-          <div style={{ fontSize: '45px', paddingLeft: '165px', paddingRight: '167px' }}>
+          <div className="noList">
             No list
           </div>
         )}

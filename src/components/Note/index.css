@@ -11,7 +11,7 @@
    word-break: break-all;;
 }
 
-@media (max-width: 910px) {
+@media (max-width: 965px) {
     .notes{
         display: flex;
         border: 2px solid rgb(0,3,255);

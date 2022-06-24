@@ -1,5 +1,5 @@
 .flexElement{
-    height: 59vh;
+    height: 62vh;
     overflow: auto;
     margin-top: 22px;
     overflow-x:hidden;
@@ -24,7 +24,12 @@
     margin-left: 25px;
     font-size: 20px;
 }
-@media (max-width: 910px) {
+.noList{
+    font-size: 45px;
+    padding-left: 165px;
+    padding-right: 167px;
+}
+@media (max-width: 965px) {
     #root{
         display: flex;
         justify-content: center;
@@ -35,5 +40,10 @@
         overflow: auto;
         margin-top: 10px;
         overflow-x: hidden;
+    }
+    .noList{
+        font-size: 45px;
+        margin-right: auto;
+        margin-left: auto;
     }
 }
