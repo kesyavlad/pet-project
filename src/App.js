@@ -18,9 +18,11 @@ function App() {
   const [value, setValue] = useState(new Date());
   const [search, setSearch] = useState('');
   const [time, setTime] = useState('23:59');
+
   const dispatch = useDispatch();
   const note = useSelector((state) => state.notes);
-  function formatDate(date) {
+
+  const formatDate = (date) => {
     return [date.getFullYear(), date.getMonth() + 1, date.getDate()].join('.');
   }
   const addNewNotes = () => {
@@ -31,13 +33,12 @@ function App() {
     };
     dispatch(addNoteAction(newNote));
     setTitle('');
-    setTime('23:59');
+    setTime('23:59'); // ToDo set current time
   };
 
   const deleteNote = (id) => {
     dispatch(deleteNoteAction(id));
   };
-
   const sortNoteDecreasing = () => {
     dispatch(sortNoteDecreasingAction());
   };

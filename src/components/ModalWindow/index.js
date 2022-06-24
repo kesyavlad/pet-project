@@ -21,6 +21,7 @@ export default function ModalDialog({ children, onSubmit, text }) {
         <div>
             <div onClick={openModal}>{children}</div>
             <Modal
+                appElement={document.getElementById('root') || undefined}
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
                 style={{
